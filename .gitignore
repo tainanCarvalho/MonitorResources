@@ -135,3 +135,5 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/Interval.Test/coverage.net5.0.opencover.xml
+/Interval.Test/coverage.net6.0.opencover.xml
