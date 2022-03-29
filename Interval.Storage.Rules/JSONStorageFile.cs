@@ -16,7 +16,7 @@ namespace Interval.Storage.Rules
             list = new List<double>();
         }
 
-        public override Task StorageData(string data)
+        public override Task StorageData(string data, DateTime timeColleteced)
         {
             list.Add(Convert.ToDouble(data));
             return Task.CompletedTask;

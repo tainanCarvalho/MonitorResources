@@ -25,7 +25,7 @@ namespace Interval.Storage.Rules
             pathOfFile = Path.Combine(path, nameFile);
         }
 
-        public abstract Task StorageData(string data);
+        public abstract Task StorageData(string data, DateTime timeColleteced);
 
         public abstract void CloseData();
         
