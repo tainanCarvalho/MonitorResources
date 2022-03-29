@@ -1,4 +1,4 @@
-﻿using Interval.Storage.Infrastruct;
+﻿using Interval.Storage.Interface;
 using System;
 using System.IO;
 using System.Threading.Tasks;

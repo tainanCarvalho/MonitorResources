@@ -1,4 +1,4 @@
-﻿using Interval.Storage.Infrastruct;
+﻿using Interval.Storage.Interface;
 using Interval.Storage.Rules;
 using System;
 using System.Collections.Generic;

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Interval.Storage.Infrastruct\Interval.Storage.Infrastruct.csproj" />
+    <ProjectReference Include="..\Interval.Storage.Infrastruct\Interval.Storage.Interface.csproj" />
     <ProjectReference Include="..\Interval.Storage.Rules\Interval.Storage.Rules.csproj" />
   </ItemGroup>
 

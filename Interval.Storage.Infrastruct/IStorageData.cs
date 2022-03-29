@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Interval.Storage.Infrastruct
+namespace Interval.Storage.Interface
 {
     public interface IStorageData
     {
