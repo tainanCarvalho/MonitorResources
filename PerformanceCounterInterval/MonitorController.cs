@@ -47,9 +47,9 @@ namespace PerformanceCounterInterval
                 {
                     var date = DateTime.Now;
                     var result = monitor.GetProcessTimeUsage(processName);
-                    await storeManagerProc.StorageData((result * 100).ToString(), date);
+                    await storeManagerProc.StorageData((result * 100 * 2).ToString(), date);
 
-                    Console.WriteLine(string.Format("{0:P}", result));
+                    Console.WriteLine(string.Format("{0:P}", result*2));
 
                     result = monitor.GetProcessMemoryUsage(processName);
                     await storeManagerMem.StorageData(result.ToString(), date);

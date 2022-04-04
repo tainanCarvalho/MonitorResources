@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Interval.Storage.Rules
@@ -20,7 +21,7 @@ namespace Interval.Storage.Rules
             if (writer.BaseStream == null)
                 return;
 
-            await writer.WriteLineAsync(data);
+            await writer.WriteLineAsync(BuildRow(data, timeColleteced));
             await writer.FlushAsync();
         }
 
@@ -38,6 +39,13 @@ namespace Interval.Storage.Rules
             {
                 Console.WriteLine($@"Arquivo salvo como:{ pathOfFile }");
             }
+        }
+
+        private string BuildRow(string data, DateTime dateTime)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append(data).Append(";").Append(dateTime.ToString());
+            return stringBuilder.ToString();
         }
     }
 }

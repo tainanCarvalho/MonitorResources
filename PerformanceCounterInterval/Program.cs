@@ -36,13 +36,20 @@ namespace PerformanceCounterInterval
             var storeMem = StorageFactory.Factory(extension, path, nameFileMem);
             var storeProcess = StorageFactory.Factory(extension, path, nameFileProcessor);
 
-            var controller = new MonitorController(storeProcess, storeMem, start, interval, name);
-           
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(controller.CloseEvent);
+            try
+            {
+                var controller = new MonitorController(storeProcess, storeMem, start, interval, name);
 
-            controller.StartMonitorResources().Wait(TimeSpan.FromMinutes(interval + 2));
+                Console.CancelKeyPress += new ConsoleCancelEventHandler(controller.CloseEvent);
 
-            controller.Close();
+                controller.StartMonitorResources().Wait(TimeSpan.FromMinutes(interval + 2));
+
+                controller.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + "\n\n" + e.StackTrace);
+            }
 
             Console.WriteLine($@"Dados salvos em { path }");            
         }

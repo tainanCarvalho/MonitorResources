@@ -10,15 +10,14 @@ namespace Interval.Storage.Rules
     {
         private const string EXTENSION = ".json";
 
-        private readonly List<double> list;
-        public JSONStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION)
-        {
-            list = new List<double>();
-        }
+        private readonly List<DataVO> list;
+      
+        public JSONStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION) => list = new();
 
-        public override Task StorageData(string data, DateTime timeColleteced)
+
+        public override Task StorageData(string value, DateTime timeColleteced)
         {
-            list.Add(Convert.ToDouble(data));
+            list.Add(CreateData(value, timeColleteced));
             return Task.CompletedTask;
         }
 
@@ -26,22 +25,24 @@ namespace Interval.Storage.Rules
         {
             try
             {
-                var data = new DataVO()
-                {
-                    data = list
-                };
+                var data = new MeasureDataVO<DataVO>() { data = list };
 
-                using (var file = File.Create(pathOfFile))
-                using (StreamWriter writer = new StreamWriter(file))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(writer, data);
-                }
+                JsonSerializer serializer = new JsonSerializer();
+
+                WriteInFile(data, serializer);
             }
             finally
             {
 
             }
+        }
+        
+        private void WriteInFile<T>(T data, JsonSerializer serializer)
+        {
+            using var file = File.Create(pathOfFile);
+            using StreamWriter writer = new(file);
+
+            serializer.Serialize(writer, data);
         }
     }
 }
