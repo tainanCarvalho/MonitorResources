@@ -23,3 +23,14 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --framework net6.0 /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=40
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.4
+      with:
+        reports: 'D:\a\MonitorResources\MonitorResources\Interval.Test\coverage.net6.0.opencover.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: 'D:\a\MonitorResources\MonitorResources\Interval.Test\Coveragereport' # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'Html' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary
+    - name: Upload coverage report artifact
+      uses: actions/upload-artifact@v2.2.3
+      with:
+         name: CoverageReport # Artifact name        
+         path: D:\a\MonitorResources\MonitorResources\Interval.Test\Coveragereport # Directory containing files to upload
