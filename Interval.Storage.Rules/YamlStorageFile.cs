@@ -40,7 +40,7 @@ namespace Interval.Storage.Rules
 
         private void WriteInFile<T>(T data, ISerializer serializer)
         {
-            using var writer = new StreamWriter(pathOfFile);
+            using var writer = new StreamWriter(file);
 
             serializer.Serialize(writer, data);
         }

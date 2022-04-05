@@ -17,7 +17,7 @@ namespace Interval.Storage.Rules
 
         public override async Task StorageData(string data, DateTime timeColleteced)
         {
-            writer ??= new StreamWriter(pathOfFile);
+            writer ??= new StreamWriter(file);
             if (writer.BaseStream == null)
                 return;
 

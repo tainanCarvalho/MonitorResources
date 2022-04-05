@@ -1,16 +1,20 @@
 ﻿using Interval.Storage.Interface;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Interval.Storage.Rules
 {
+    [ExcludeFromCodeCoverage]
     public abstract class StoreManager : IStorageData
     {
 
         private readonly string path;
 
         protected readonly string pathOfFile;
+
+        protected readonly Stream file;
 
         public string PathFile { get => path; }
 
@@ -23,7 +27,10 @@ namespace Interval.Storage.Rules
 
             nameFile += extension;
             pathOfFile = Path.Combine(path, nameFile);
+
+            file = File.Create(pathOfFile);   
         }
+
 
         public abstract Task StorageData(string data, DateTime timeColleteced);
 
