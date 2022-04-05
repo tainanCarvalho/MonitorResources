@@ -38,19 +38,13 @@ namespace PerformanceCounterInterval
             return 0;
         }
 
+#pragma warning disable CA1416 // Validate platform compatibility
         public double GetProcessMemoryUsage(string processName)
-        {
-            /* var mos = new ManagementObjectSearcher("SELECT * FROM Win32_PerfRawData_PerfProc_Process");
-             runProcessOne = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PrivateBytes"].Value);
-
-             var p1 = runProcessOne[processName];
-             return p1 / (int)(1024 * 1024);*/
-
+        {            
             var process = new PerformanceCounter("Process", "Working Set - Private", processName, true);
             try
             {
                 return process.NextValue() / (int)(1024 * 1024);
-
             }
             catch
             {
@@ -62,5 +56,7 @@ namespace PerformanceCounterInterval
                 process.Dispose();
             }
         }
+#pragma warning restore CA1416 // Validate platform compatibility
+
     }
 }

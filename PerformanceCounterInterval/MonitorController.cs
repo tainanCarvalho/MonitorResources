@@ -1,4 +1,5 @@
 ﻿using Interval.Storage.Interface;
+using Interval.Storage.Tools;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ namespace PerformanceCounterInterval
 {
     public sealed class MonitorController
     {
+        private static Ilogger logger = new Logger(typeof(MonitorController));
+
         private readonly CancellationTokenSource cancellationToken;
 
         private readonly IStorageData storeManagerProc; 
@@ -49,12 +52,12 @@ namespace PerformanceCounterInterval
                     var result = monitor.GetProcessTimeUsage(processName);
                     await storeManagerProc.StorageData((result * 100 * 2).ToString(), date);
 
-                    Console.WriteLine(string.Format("{0:P}", result*2));
+                    logger.AddDebug(string.Format("{0:P}", result*2));
 
                     result = monitor.GetProcessMemoryUsage(processName);
                     await storeManagerMem.StorageData(result.ToString(), date);
 
-                    Console.WriteLine($@"{result.ToString("0.##")} MB");
+                    logger.AddDebug($@"{result.ToString("0.##")} MB");
 
                     await Task.Delay(1000);
                 }
@@ -62,7 +65,6 @@ namespace PerformanceCounterInterval
                 {
                 }
             }
-
         }
 
         internal void CloseEvent(object sender, ConsoleCancelEventArgs e)

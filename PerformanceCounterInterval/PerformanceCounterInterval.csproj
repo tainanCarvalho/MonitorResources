@@ -12,6 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Interval.Storage.Factory\Interval.Storage.Factory.csproj" />
+    <ProjectReference Include="..\Interval.Storage.Tools\Interval.Storage.Tools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LogDebug.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

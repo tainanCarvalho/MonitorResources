@@ -1,4 +1,6 @@
 ﻿using Interval.Storage.Factory;
+using Interval.Storage.Interface;
+using Interval.Storage.Tools;
 using System;
 using System.Threading;
 
@@ -6,8 +8,11 @@ namespace PerformanceCounterInterval
 {
     class Program
     {
+        private static Ilogger logger = new Logger(typeof(Program));    
         public static void Main(string[] args)
         {
+            LoggerConfig.Config();
+
             string temp;
             Console.WriteLine("Quantidade de tempo em minutos para o monitoramento do consumo da cpu");
             temp = Console.ReadLine();
@@ -48,10 +53,10 @@ namespace PerformanceCounterInterval
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message + "\n\n" + e.StackTrace);
+                logger.AddError($@"Falha na verficação do rescursos.", e);
             }
 
-            Console.WriteLine($@"Dados salvos em { path }");            
+            logger.AddInformation($@"Dados salvos em { path }");            
         }
     }    
 }
