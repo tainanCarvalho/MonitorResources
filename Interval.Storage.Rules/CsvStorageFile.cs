@@ -17,7 +17,12 @@ namespace Interval.Storage.Rules
 
         public override async Task StorageData(string data, DateTime timeColleteced)
         {
-            writer ??= new StreamWriter(file);
+            if (writer == null)
+            {
+                writer = new(pathOfFile);
+                await writer.WriteLineAsync("data;valor");
+            }
+
             if (writer.BaseStream == null)
                 return;
 
@@ -44,7 +49,7 @@ namespace Interval.Storage.Rules
         private string BuildRow(string data, DateTime dateTime)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append(data).Append(";").Append(dateTime.ToString());
+            stringBuilder.Append(dateTime.ToString()).Append(";").Append(data);
             return stringBuilder.ToString();
         }
     }
