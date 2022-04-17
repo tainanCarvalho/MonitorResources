@@ -1,5 +1,5 @@
 ﻿using Interval.Storage.Interface;
-using Interval.Storage.Rules;
+using Interval.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

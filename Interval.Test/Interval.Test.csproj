@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Interval.Storage.Factory\Interval.Storage.Factory.csproj" />
     <ProjectReference Include="..\Interval.Storage.Infrastruct\Interval.Storage.Interface.csproj" />
-    <ProjectReference Include="..\Interval.Storage.Rules\Interval.Storage.Rules.csproj" />
+    <ProjectReference Include="..\Interval.Storage.Rules\Interval.Storage.csproj" />
   </ItemGroup>
 
 </Project>

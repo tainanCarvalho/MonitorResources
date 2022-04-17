@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace Interval.Storage.Rules
+namespace Interval.Storage
 {
     public sealed class YamlStorageFile : StoreManager
     {

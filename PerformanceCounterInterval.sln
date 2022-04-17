@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceCounterInterval", "PerformanceCounterInterval\PerformanceCounterInterval.csproj", "{F8211EF0-A553-4841-86ED-786FBB19D90A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage.Rules", "Interval.Storage.Rules\Interval.Storage.Rules.csproj", "{B42132E2-4E4E-4163-B536-5836A6ABAAED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage", "Interval.Storage.Rules\Interval.Storage.csproj", "{B42132E2-4E4E-4163-B536-5836A6ABAAED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage.Interface", "Interval.Storage.Infrastruct\Interval.Storage.Interface.csproj", "{F8ABA84C-00F8-4643-9951-ACD2AF42FD33}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interval.Storage.Tools", "Interval.Storage.Tools\Interval.Storage.Tools.csproj", "{77330E64-D177-44FC-A082-BCC380A31BB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage.Tools", "Interval.Storage.Tools\Interval.Storage.Tools.csproj", "{77330E64-D177-44FC-A082-BCC380A31BB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

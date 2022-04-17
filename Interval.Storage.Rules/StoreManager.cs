@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Interval.Storage.Rules
+namespace Interval.Storage
 {
     [ExcludeFromCodeCoverage]
     public abstract class StoreManager : IStorageData

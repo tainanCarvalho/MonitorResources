@@ -1,5 +1,5 @@
 ﻿using Interval.Storage.Factory;
-using Interval.Storage.Rules;
+using Interval.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

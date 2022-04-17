@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interval.Storage.Rules
+namespace Interval.Storage
 {
     public sealed class CsvStorageFile : StoreManager
     {
