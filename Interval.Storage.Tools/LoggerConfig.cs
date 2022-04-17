@@ -1,12 +1,13 @@
 ﻿using log4net.Config;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Interval.Storage.Tools
 {
     public sealed class LoggerConfig
     {
-        
+        [ExcludeFromCodeCoverage]
         public static void Config()
         {
 #if DEBUG

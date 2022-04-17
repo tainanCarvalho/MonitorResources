@@ -15,6 +15,7 @@ namespace Interval.Storage.Rules
         {
         }
 
+
         public override async Task StorageData(string data, DateTime timeColleteced)
         {
             if (writer == null)

@@ -43,7 +43,7 @@ namespace PerformanceCounterInterval
 
             try
             {
-                var controller = new MonitorController(storeProcess, storeMem, start, interval, name);
+                var controller = new MonitorController(storeProcess, storeMem, null, start, interval, name);
 
                 Console.CancelKeyPress += new ConsoleCancelEventHandler(controller.CloseEvent);
 

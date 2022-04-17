@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Interval.Storage.Rules
 {
 
+    [ExcludeFromCodeCoverage]
     public class JSONStorageFile : StoreManager
     {
         private const string EXTENSION = ".json";

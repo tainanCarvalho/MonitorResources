@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --framework net6.0 /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=40
+      run: dotnet test --framework net6.0 /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=40 /p:Exclude=[Interval.Storage.Rules]*
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.1.4
       with:

@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Interval.Storage.Interface;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Management;
 using System.Threading;
 
 namespace PerformanceCounterInterval
 {
-    public sealed class MonitorResources
+    [ExcludeFromCodeCoverage]
+    public sealed class MonitorResources : IMonitorResources
     {
         private Dictionary<object, ulong> runProcessOne;
         private Dictionary<object, ulong> runProcessTwo;

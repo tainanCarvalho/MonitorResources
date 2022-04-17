@@ -1,11 +1,13 @@
 ﻿using Interval.Storage.Interface;
 using Interval.Storage.Tools;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace PerformanceCounterInterval
 {
+    [ExcludeFromCodeCoverage]
     public sealed class MonitorController
     {
         private static Ilogger logger = new Logger(typeof(MonitorController));
@@ -16,7 +18,7 @@ namespace PerformanceCounterInterval
         
         private readonly IStorageData storeManagerMem;
 
-        private readonly MonitorResources monitor;
+        private readonly IMonitorResources monitor;
 
         private readonly DateTime time;
 
@@ -26,7 +28,8 @@ namespace PerformanceCounterInterval
 
         public MonitorController(
                 IStorageData storeManagerProc,
-                IStorageData storeManagerMem, 
+                IStorageData storeManagerMem,
+                IMonitorResources monitorResources,
                 DateTime time, 
                 int interval, 
                 string processName
@@ -38,7 +41,7 @@ namespace PerformanceCounterInterval
             this.storeManagerMem = storeManagerMem;
             this.storeManagerProc = storeManagerProc;
 
-            this.monitor = new MonitorResources();
+            this.monitor = monitorResources ?? new MonitorResources();
             this.cancellationToken = new CancellationTokenSource();
         }
 

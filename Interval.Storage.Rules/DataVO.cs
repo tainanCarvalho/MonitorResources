@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Interval.Storage.Rules
 {
+    [ExcludeFromCodeCoverage]
     [DataContract]
     public sealed class MeasureDataVO<T>
 
@@ -15,6 +17,7 @@ namespace Interval.Storage.Rules
         public List<T> data { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     [DataContract]
     public sealed class DataVO
     {

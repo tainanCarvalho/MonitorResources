@@ -1,9 +1,11 @@
 ﻿using Interval.Storage.Interface;
 using log4net;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interval.Storage.Tools
 {
+    [ExcludeFromCodeCoverage]
     public class Logger : Ilogger
     {
         private ILog log;

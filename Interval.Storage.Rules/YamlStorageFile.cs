@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -15,20 +15,20 @@ namespace Interval.Storage.Rules
 
         private readonly List<DataVO> list;
 
-        public YamlStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION)
-        {
-            list = new();
-        }
+        [ExcludeFromCodeCoverage]
+        public YamlStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION) => list = new();
 
+        [ExcludeFromCodeCoverage]
         public override Task StorageData(string data, DateTime timeColleteced)
         {            
             list.Add(CreateData(data, timeColleteced));
             return Task.CompletedTask;
         }
 
+        [ExcludeFromCodeCoverage]
         public override void CloseData() => WriteYamlInFile(new MeasureDataVO<DataVO> { data = list });
-        
 
+        [ExcludeFromCodeCoverage]
         private void WriteYamlInFile<T>(T data)
         {
             var serializer = new SerializerBuilder()
@@ -38,6 +38,7 @@ namespace Interval.Storage.Rules
              WriteInFile(data, serializer);
         }
 
+        [ExcludeFromCodeCoverage]
         private void WriteInFile<T>(T data, ISerializer serializer)
         {
             using var writer = new StreamWriter(file);
