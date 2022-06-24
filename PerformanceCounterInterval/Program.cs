@@ -3,13 +3,14 @@ using Interval.Storage.Interface;
 using Interval.Storage.Tools;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PerformanceCounterInterval
 {
     class Program
     {
         private static Ilogger logger = new Logger(typeof(Program));    
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             LoggerConfig.Config();
 
@@ -47,7 +48,7 @@ namespace PerformanceCounterInterval
 
                 Console.CancelKeyPress += new ConsoleCancelEventHandler(controller.CloseEvent);
 
-                controller.StartMonitorResources().Wait(TimeSpan.FromMinutes(interval + 2));
+                await controller.StartMonitorResources();
 
                 controller.Close();
             }
@@ -56,7 +57,7 @@ namespace PerformanceCounterInterval
                 logger.AddError($@"Falha na verficação do rescursos.", e);
             }
 
-            logger.AddInformation($@"Dados salvos em { path }");            
+            logger.AddInformation($@"Dados salvos em { path }");                       
         }
     }    
 }

@@ -10,13 +10,14 @@ namespace Interval.Storage.Tools
     {
         private ILog log;
         public Logger(Type e) => log = LogManager.GetLogger(e);
-        public bool IsDebugEnabled => log.IsDebugEnabled;
 
         public bool IsInfoEnabled => log.IsInfoEnabled;
 
         public bool IsWarnEnabled => log.IsWarnEnabled;
 
         public bool IsErrorEnabled => log.IsErrorEnabled;
+
+        public bool IsDebugEnabled => log.IsDebugEnabled;
 
         public void AddDebug(string message) => log.Debug(message); 
 

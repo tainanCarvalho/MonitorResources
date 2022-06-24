@@ -20,7 +20,7 @@ namespace Interval.Storage
         {
             if (writer == null)
             {
-                writer = new(pathOfFile);
+                writer = new(file);
                 await writer.WriteLineAsync("data;valor");
             }
 
