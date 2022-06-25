@@ -5,6 +5,7 @@ namespace Interval.Storage.Interface
     public interface Ilogger
     {
         void AddDebug(string message);
+        
         void AddInformation(string message);
 
         void AddWarning(string message);

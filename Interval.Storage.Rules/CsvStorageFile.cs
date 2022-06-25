@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Interval.Storage.Interface;
+using Interval.Storage.Tools;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,8 @@ namespace Interval.Storage
 {
     public sealed class CsvStorageFile : StoreManager
     {
+
+        private readonly static Ilogger logger = new Logger(typeof(CsvStorageFile));
         private const string EXTENSION = ".csv";
 
         private StreamWriter writer = null;
@@ -43,7 +47,7 @@ namespace Interval.Storage
             }
             finally
             {
-                Console.WriteLine($@"Arquivo salvo como:{ pathOfFile }");
+                logger.AddInformation($@"Arquivo salvo como:{ pathOfFile }");
             }
         }
 

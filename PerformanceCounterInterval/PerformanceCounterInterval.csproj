@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="6.0.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="6.0.1" />
     <PackageReference Include="System.Management" Version="6.0.0" />
+    <PackageReference Include="ThomasLevesque.WeakEvent" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interval.MonitorResource\Interval.MonitorResource.csproj" />
     <ProjectReference Include="..\Interval.Storage.Factory\Interval.Storage.Factory.csproj" />
     <ProjectReference Include="..\Interval.Storage.Tools\Interval.Storage.Tools.csproj" />
   </ItemGroup>

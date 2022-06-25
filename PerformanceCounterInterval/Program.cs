@@ -1,4 +1,5 @@
-﻿using Interval.Storage.Factory;
+﻿using Interval.MonitorResource;
+using Interval.Storage.Factory;
 using Interval.Storage.Interface;
 using Interval.Storage.Tools;
 using System;
@@ -48,7 +49,7 @@ namespace PerformanceCounterInterval
 
                 Console.CancelKeyPress += new ConsoleCancelEventHandler(controller.CloseEvent);
 
-                await controller.StartMonitorResources();
+                await controller.StartStorageResourceDataAsync();
 
                 controller.Close();
             }

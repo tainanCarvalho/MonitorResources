@@ -1,12 +1,11 @@
-﻿using Interval.Storage.Interface;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Management;
 using System.Threading;
 
-namespace PerformanceCounterInterval
+namespace Interval.MonitorResource
 {
     [ExcludeFromCodeCoverage]
     public sealed class MonitorResources : IMonitorResources
