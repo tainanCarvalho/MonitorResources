@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage.Tools", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Forms.Graphic", "Interval.Forms.Graphic\Interval.Forms.Graphic.csproj", "{FE4B9BAE-E26B-4157-BD86-C0045A16F6A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interval.MonitorResource", "Interval.MonitorResource\Interval.MonitorResource.csproj", "{B220D754-18FF-454E-B07E-F4326A977107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.MonitorResource", "Interval.MonitorResource\Interval.MonitorResource.csproj", "{B220D754-18FF-454E-B07E-F4326A977107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interval.WPF.Graphic", "Interval.WPF.Graphic\Interval.WPF.Graphic.csproj", "{05CFF45B-91E2-4863-B468-C7AB2620B726}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{B220D754-18FF-454E-B07E-F4326A977107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B220D754-18FF-454E-B07E-F4326A977107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B220D754-18FF-454E-B07E-F4326A977107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05CFF45B-91E2-4863-B468-C7AB2620B726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05CFF45B-91E2-4863-B468-C7AB2620B726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05CFF45B-91E2-4863-B468-C7AB2620B726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05CFF45B-91E2-4863-B468-C7AB2620B726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
