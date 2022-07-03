@@ -58,7 +58,7 @@ namespace Interval.WPF.Graphic
 
         private void OnMemoryData(object? sender, ResourceDataEventArgs e)
         {
-            this.Dispatcher.Invoke(() => 
+            this.Dispatcher.Invoke(() =>
             {
                 memoryChartValues.Add(new ResourceDataCartesianVO()
                 {
@@ -70,8 +70,8 @@ namespace Interval.WPF.Graphic
 
                 if (memoryChartValues.Count > 20)
                     memoryChartValues.RemoveAt(0);
-            });  
-            
+            });
+
         }
 
 
@@ -82,17 +82,20 @@ namespace Interval.WPF.Graphic
 
             foreach (Process theprocess in processlist.OrderBy(x => x.ProcessName))
             {
-                processorsNameCombobox.Items.Add(new ProcessorName(theprocess.ProcessName));
+                processorsNameCombobox.Items.Add(new ProcessorName(theprocess.ProcessName, theprocess.Id.ToString()));
             }
+
+            processorsNameCombobox.SelectedIndex = 0;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (processorsNameCombobox.SelectedItem is null)
-            {
                 return;
-            }
-            monitor = new MonitorController(DateTime.Now, -1, processorsNameCombobox.SelectedItem.ToString(), null);
+
+            var processor = (ProcessorName)processorsNameCombobox.SelectedItem;
+
+            monitor = new MonitorController(DateTime.Now, -1, processor.Name, null);
             Task.Run(async () => await monitor.RunMonitorResourcesData());
         }
 
@@ -200,14 +203,50 @@ namespace Interval.WPF.Graphic
             processorCartesianChart.AxisX[0].MaxValue = date.Ticks + TimeSpan.FromSeconds(1).Ticks;
             processorCartesianChart.AxisX[0].MinValue = date.Ticks - TimeSpan.FromSeconds(10).Ticks;
         }
+
+        private void SerachBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            var text = SearchBox.Text;
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                StartComboBoxProcessorName();
+                return;
+            }
+
+            if (text.Length < 3)
+                return;
+
+            var list = processorsNameCombobox.Items.Cast<ProcessorName>()
+                                .Where(x => x.ToString().IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+
+
+            processorsNameCombobox.Items.Clear();
+
+
+            foreach (var elemet in list)
+            {
+                processorsNameCombobox.Items.Add(elemet);
+            }
+
+            if (processorsNameCombobox.Items.Count != 0)
+                processorsNameCombobox.SelectedIndex = 0;
+        }
     }
 
     public class ProcessorName
     {
         private readonly string name;
-        public ProcessorName(string name) => this.name = name;
 
-        public override string ToString() => name;
+        private readonly string pid;
+
+        public string Name { get => name; }
+        public ProcessorName(string name, string pid)
+        {
+            this.name = name;
+            this.pid = pid;
+        }
+
+        public override string ToString() => $@"{ name } [{ pid }]";
 
     }
 

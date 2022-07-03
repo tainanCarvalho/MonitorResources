@@ -75,19 +75,23 @@ namespace Interval.Forms.Graphic
 
             foreach (Process theprocess in processlist.OrderBy(x => x.ProcessName))
             {
-                processorsNameCombobox.Items.Add(new ProcessorName(theprocess.ProcessName));
+                processorsNameCombobox.Items.Add(new ProcessorName(theprocess.ProcessName, theprocess.Id.ToString()));
             }
+
+            processorsNameCombobox.SelectedIndex = 0;
+
 
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if(processorsNameCombobox.SelectedItem is null)
+            if (processorsNameCombobox.SelectedItem is null)
             {
                 MessageBox.Show("Deve selecionar um item", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            monitor = new MonitorController(DateTime.Now, -1, processorsNameCombobox.SelectedItem.ToString(), null);
+            var process = (ProcessorName)processorsNameCombobox.SelectedItem;
+            monitor = new MonitorController(DateTime.Now, -1, process.Name, null);
             Task.Run(async () => await monitor.RunMonitorResourcesData());
         }
 
@@ -195,14 +199,50 @@ namespace Interval.Forms.Graphic
             processorCartesianChart.AxisX[0].MaxValue = date.Ticks + TimeSpan.FromSeconds(1).Ticks;
             processorCartesianChart.AxisX[0].MinValue = date.Ticks - TimeSpan.FromSeconds(10).Ticks;
         }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            var text = SearchBox.Text;
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                StartComboBoxProcessorName();
+                return;
+            }
+
+            if (text.Length < 3)
+                return;
+
+            var list = processorsNameCombobox.Items.Cast<ProcessorName>()
+                                .Where(x => x.ToString().IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+
+
+            processorsNameCombobox.Items.Clear();
+
+
+            foreach (var elemet in list)
+            {
+                processorsNameCombobox.Items.Add(elemet);
+            }
+
+            if (processorsNameCombobox.Items.Count != 0)
+                processorsNameCombobox.SelectedIndex = 0;
+        }
     }
 
     public class ProcessorName
     {
         private readonly string name;
-        public ProcessorName(string name) => this.name = name;
 
-        public override string ToString() => name;
+        private readonly string pid;
+
+        public string Name { get => name; }
+        public ProcessorName(string name, string pid)
+        {
+            this.name = name;
+            this.pid = pid;
+        }
+
+        public override string ToString() => $@"{ name } [{ pid }]";
 
     }
 
