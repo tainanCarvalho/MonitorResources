@@ -19,6 +19,11 @@ namespace Interval.WPF.Graphic
     {
         private MonitorController? monitor;
 
+        private CancellationTokenSource cancellationTokenSource;
+
+        private double maxMemory;
+
+        private double maxProcess;
 
         private ChartValues<ResourceDataCartesianVO> memoryChartValues;
 
@@ -40,8 +45,17 @@ namespace Interval.WPF.Graphic
 
         private void OnProcessorData(object? sender, ResourceDataEventArgs e)
         {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
             this.Dispatcher.Invoke(() =>
             {
+                if (maxProcess <= e.Data.Value)
+                {
+                    maxProcess = e.Data.Value;
+                    MaxProcessorValue.Text = maxProcess.ToString("P", CultureInfo.InvariantCulture);
+                }
+
                 processorChartValues.Add(new ResourceDataCartesianVO()
                 {
                     Value = e.Data.Value,
@@ -58,8 +72,17 @@ namespace Interval.WPF.Graphic
 
         private void OnMemoryData(object? sender, ResourceDataEventArgs e)
         {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
             this.Dispatcher.Invoke(() =>
             {
+                if (maxMemory <= e.Data.Value)
+                {
+                    maxMemory = e.Data.Value;
+                    MaxMemoryValue.Text = $@"{maxMemory.ToString("0.##")} MB";
+                }
+
                 memoryChartValues.Add(new ResourceDataCartesianVO()
                 {
                     Value = e.Data.Value,
@@ -93,6 +116,8 @@ namespace Interval.WPF.Graphic
             if (processorsNameCombobox.SelectedItem is null)
                 return;
 
+            cancellationTokenSource = new CancellationTokenSource();
+
             var processor = (ProcessorName)processorsNameCombobox.SelectedItem;
 
             monitor = new MonitorController(DateTime.Now, -1, processor.Name, null);
@@ -101,10 +126,15 @@ namespace Interval.WPF.Graphic
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
+            cancellationTokenSource.Cancel();
             monitor?.Stop();
             Thread.Sleep(2000);
             memoryChartValues.Clear();
             processorChartValues.Clear();
+            maxMemory = 0;
+            maxProcess = 0;
+            MaxProcessorValue.Text = String.Empty;
+            MaxMemoryValue.Text = String.Empty;
         }
 
         private void SettingChartMemory(DateTime date)

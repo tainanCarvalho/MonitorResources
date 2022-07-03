@@ -16,6 +16,12 @@ namespace Interval.Forms.Graphic
     {
         private MonitorController? monitor;
 
+        private double maxMemory;
+
+        private double maxProcess;
+
+        private CancellationTokenSource cancellationTokenSource;
+
         private ChartValues<ResourceDataCartesianVO> memoryChartValues;
 
         private ChartValues<ResourceDataCartesianVO> processorChartValues;
@@ -36,35 +42,59 @@ namespace Interval.Forms.Graphic
 
         private void OnProcessorData(object? sender, ResourceDataEventArgs e)
         {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
             this.Invoke(() =>
             {
+                var data = e.Data;
+
+                if (maxProcess <= data.Value)
+                {
+                    maxProcess = data.Value;
+                    MaxProcessLabelValue.Text = maxProcess.ToString("P", CultureInfo.InvariantCulture);
+                }
+
                 processorChartValues.Add(new ResourceDataCartesianVO()
                 {
-                    Value = e.Data.Value,
-                    Date = e.Data.Date
+                    Value = data.Value,
+                    Date = data.Date
                 });
 
-                SetAxisLimitsProcessor(e.Data.Date);
+                SetAxisLimitsProcessor(data.Date);
 
                 if (processorChartValues.Count > 20)
                     processorChartValues.RemoveAt(0);
+
             });
         }
 
         private void OnMemoryData(object? sender, ResourceDataEventArgs e)
         {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
             this.Invoke(() =>
             {
+                var data = e.Data;
+
+                if (maxMemory <= data.Value)
+                {
+                    maxMemory = data.Value;
+                    MaxMemoryLabelValue.Text = $@"{maxMemory.ToString("0.##")} MB";
+                }
+
                 memoryChartValues.Add(new ResourceDataCartesianVO()
                 {
-                    Value = e.Data.Value,
-                    Date = e.Data.Date
+                    Value = data.Value,
+                    Date = data.Date
                 });
 
-                SetAxisLimitsMemory(e.Data.Date);
+                SetAxisLimitsMemory(data.Date);
 
                 if (memoryChartValues.Count > 20)
                     memoryChartValues.RemoveAt(0);
+                
             });
         }
 
@@ -91,16 +121,24 @@ namespace Interval.Forms.Graphic
                 return;
             }
             var process = (ProcessorName)processorsNameCombobox.SelectedItem;
+
+            cancellationTokenSource = new CancellationTokenSource();
             monitor = new MonitorController(DateTime.Now, -1, process.Name, null);
+
             Task.Run(async () => await monitor.RunMonitorResourcesData());
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            cancellationTokenSource.Cancel();
             monitor?.Stop();
             Thread.Sleep(2000);
             memoryChartValues.Clear();
             processorChartValues.Clear();
+            maxMemory = 0;
+            maxProcess = 0;
+            MaxProcessLabelValue.Text = string.Empty;
+            MaxMemoryLabelValue.Text = string.Empty;
         }
 
         private void SettingChartMemory(DateTime date)

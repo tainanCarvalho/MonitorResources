@@ -18,6 +18,10 @@
         <Button x:Name="StartButton" Content="Start" Margin="10,96,0,0" BorderBrush="{x:Null}" Background="{x:Null}" OpacityMask="#FF524D4D" Foreground="Black" Click="StartButton_Click" HorizontalAlignment="Left" Width="228" VerticalAlignment="Top" Height="35"/>
         <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Height="35" Width="228" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF020202" Click="StopButton_Click"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Height="33" TextChanged="SerachBox_TextChanged" TextAlignment="Left"/>
+        <TextBlock x:Name="MaxProcessorLabel" HorizontalAlignment="Left" Margin="10,458,0,0" TextWrapping="Wrap" Text="Pico processamento" VerticalAlignment="Top" Height="36" Width="105"/>
+        <TextBlock x:Name="MaxMemoryLabel" HorizontalAlignment="Left" Margin="10,499,0,0" TextWrapping="Wrap" Text="Pico memória" VerticalAlignment="Top" Width="110" Height="36"/>
+        <TextBlock x:Name="MaxProcessorValue" HorizontalAlignment="Left" Margin="125,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="18" TextAlignment="Left"/>
+        <TextBlock x:Name="MaxMemoryValue" HorizontalAlignment="Left" Margin="125,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="36"/>
 
     </Grid>
 </Window>
