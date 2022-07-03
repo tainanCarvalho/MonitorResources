@@ -20,6 +20,8 @@ namespace Interval.Forms.Graphic
 
         private double maxProcess;
 
+        private SemaphoreSlim semaphoreSlimProcessor;
+
         private CancellationTokenSource cancellationTokenSource;
 
         private ChartValues<ResourceDataCartesianVO> memoryChartValues;
@@ -45,27 +47,41 @@ namespace Interval.Forms.Graphic
             if (cancellationTokenSource.IsCancellationRequested)
                 return;
 
-            this.Invoke(() =>
+            Task.Run(async () => 
             {
-                var data = e.Data;
-
-                if (maxProcess <= data.Value)
+                try
                 {
-                    maxProcess = data.Value;
-                    MaxProcessLabelValue.Text = maxProcess.ToString("P", CultureInfo.InvariantCulture);
+                    if (!await semaphoreSlimProcessor.WaitAsync(60000))
+                        return;
+
+                    this.Invoke(() =>
+                    {
+                        var data = e.Data;
+                        var value = data.Value;
+
+                        if (maxProcess <= value)
+                        {
+                            maxProcess = value;
+                            MaxProcessLabelValue.Text = (maxProcess * 2.0).ToString("P", CultureInfo.InvariantCulture);
+                        }
+
+                        processorChartValues.Add(new ResourceDataCartesianVO()
+                        {
+                            Value = value,
+                            Date = data.Date
+                        });
+
+                        SetAxisLimitsProcessor(data.Date);
+
+                        if (processorChartValues.Count > 20)
+                            processorChartValues.RemoveAt(0);
+
+                    });
                 }
-
-                processorChartValues.Add(new ResourceDataCartesianVO()
+                finally
                 {
-                    Value = data.Value,
-                    Date = data.Date
-                });
-
-                SetAxisLimitsProcessor(data.Date);
-
-                if (processorChartValues.Count > 20)
-                    processorChartValues.RemoveAt(0);
-
+                    semaphoreSlimProcessor.Release();
+                }
             });
         }
 
@@ -123,6 +139,7 @@ namespace Interval.Forms.Graphic
             var process = (ProcessorName)processorsNameCombobox.SelectedItem;
 
             cancellationTokenSource = new CancellationTokenSource();
+            semaphoreSlimProcessor = new(1, 1);
             monitor = new MonitorController(DateTime.Now, -1, process.Name, null);
 
             Task.Run(async () => await monitor.RunMonitorResourcesData());
@@ -132,13 +149,13 @@ namespace Interval.Forms.Graphic
         {
             cancellationTokenSource.Cancel();
             monitor?.Stop();
-            Thread.Sleep(2000);
             memoryChartValues.Clear();
             processorChartValues.Clear();
             maxMemory = 0;
             maxProcess = 0;
             MaxProcessLabelValue.Text = string.Empty;
             MaxMemoryLabelValue.Text = string.Empty;
+            semaphoreSlimProcessor.Dispose();
         }
 
         private void SettingChartMemory(DateTime date)

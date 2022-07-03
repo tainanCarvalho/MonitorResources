@@ -53,7 +53,7 @@ namespace Interval.WPF.Graphic
                 if (maxProcess <= e.Data.Value)
                 {
                     maxProcess = e.Data.Value;
-                    MaxProcessorValue.Text = maxProcess.ToString("P", CultureInfo.InvariantCulture);
+                    MaxProcessorValue.Text = (maxProcess * 2.0).ToString("P", CultureInfo.InvariantCulture);
                 }
 
                 processorChartValues.Add(new ResourceDataCartesianVO()
