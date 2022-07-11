@@ -240,6 +240,10 @@ namespace Interval.Forms.Graphic
 
             });
 
+
+            processorCartesianChart.AxisY[0].MaxValue = 0.5;
+            processorCartesianChart.AxisY[0].MinValue = 0;
+
             SetAxisLimitsProcessor(date);
         }
 

@@ -219,6 +219,10 @@ namespace Interval.WPF.Graphic
 
             });
 
+            processorCartesianChart.AxisY[0].MaxValue = 0.5;
+            processorCartesianChart.AxisY[0].MinValue = 0.0;
+
+
             SetAxisLimitsProcessor(date);
         }
 

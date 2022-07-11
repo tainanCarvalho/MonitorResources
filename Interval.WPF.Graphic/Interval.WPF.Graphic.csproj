@@ -8,12 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons8-Windows-8-Programming-System-Task.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LiveCharts.Core" Version="0.9.8" />
     <PackageReference Include="LiveCharts.Wpf.Core" Version="0.9.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interval.MonitorResource\Interval.MonitorResource.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons8-Windows-8-Programming-System-Task.ico" />
   </ItemGroup>
 
 </Project>

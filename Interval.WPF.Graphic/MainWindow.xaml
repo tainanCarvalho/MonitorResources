@@ -6,22 +6,26 @@
         xmlns:local="clr-namespace:Interval.WPF.Graphic"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="776" Width="1342">
+        Title="MainWindow" Height="776" Width="1342" Icon="/Icons8-Windows-8-Programming-System-Task.ico">
     <Grid Height="730" Margin="0,1,0,0">
-        <GroupBox x:Name="groupBox" Header="Processamento" Margin="243,0,0,385" Foreground="#FF191818" BorderBrush="#FFFF3A00">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="groupBox" Header="Processamento" Margin="121,0,0,385" Foreground="#FF191818" BorderBrush="#FFFF3A00" Grid.Column="1">
             <lvc:CartesianChart Name="processorCartesianChart" />
         </GroupBox>
-        <GroupBox x:Name="groupBox1" Header="Memória" Margin="243,350,0,10" Foreground="Black" BorderBrush="#FFDE0C0C">
+        <GroupBox x:Name="groupBox1" Header="Memória" Margin="121,350,0,10" Foreground="Black" BorderBrush="#FFDE0C0C" Grid.Column="1">
             <lvc:CartesianChart Name="memoryCartesianChart" />
         </GroupBox>
-        <ComboBox x:Name="processorsNameCombobox" Margin="10,60,0,0" Background="{x:Null}" Foreground="#FF040404" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="228" Height="33"/>
-        <Button x:Name="StartButton" Content="Start" Margin="10,96,0,0" BorderBrush="{x:Null}" Background="{x:Null}" OpacityMask="#FF524D4D" Foreground="Black" Click="StartButton_Click" HorizontalAlignment="Left" Width="228" VerticalAlignment="Top" Height="35"/>
-        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Height="35" Width="228" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF020202" Click="StopButton_Click"/>
-        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Height="33" TextChanged="SerachBox_TextChanged" TextAlignment="Left"/>
+        <ComboBox x:Name="processorsNameCombobox" Margin="10,60,0,0" Background="{x:Null}" Foreground="#FF040404" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="228" Height="33" Grid.ColumnSpan="2"/>
+        <Button x:Name="StartButton" Content="Start" Margin="10,96,0,0" BorderBrush="{x:Null}" Background="{x:Null}" OpacityMask="#FF524D4D" Foreground="Black" Click="StartButton_Click" HorizontalAlignment="Left" Width="228" VerticalAlignment="Top" Height="35" Grid.ColumnSpan="2"/>
+        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Height="35" Width="228" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF020202" Click="StopButton_Click" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Height="33" TextChanged="SerachBox_TextChanged" TextAlignment="Left" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="MaxProcessorLabel" HorizontalAlignment="Left" Margin="10,458,0,0" TextWrapping="Wrap" Text="Pico processamento" VerticalAlignment="Top" Height="36" Width="105"/>
         <TextBlock x:Name="MaxMemoryLabel" HorizontalAlignment="Left" Margin="10,499,0,0" TextWrapping="Wrap" Text="Pico memória" VerticalAlignment="Top" Width="110" Height="36"/>
-        <TextBlock x:Name="MaxProcessorValue" HorizontalAlignment="Left" Margin="125,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="18" TextAlignment="Left"/>
-        <TextBlock x:Name="MaxMemoryValue" HorizontalAlignment="Left" Margin="125,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="36"/>
+        <TextBlock x:Name="MaxProcessorValue" HorizontalAlignment="Left" Margin="3,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="18" TextAlignment="Left" Grid.Column="1"/>
+        <TextBlock x:Name="MaxMemoryValue" HorizontalAlignment="Left" Margin="3,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="36" Grid.Column="1"/>
 
     </Grid>
 </Window>

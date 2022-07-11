@@ -30,6 +30,7 @@ namespace Interval.Forms.Graphic
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.processorCartesianChart = new LiveCharts.WinForms.CartesianChart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -216,6 +217,7 @@ namespace Interval.Forms.Graphic
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Gráfico de consumo";
             this.groupBox1.ResumeLayout(false);
