@@ -8,6 +8,12 @@ namespace Interval.Storage.Tools
     public sealed class LoggerConfig
     {
         [ExcludeFromCodeCoverage]
+        private LoggerConfig()
+        {
+            //private instance
+        }
+
+        [ExcludeFromCodeCoverage]
         public static void Config()
         {
 #if DEBUG

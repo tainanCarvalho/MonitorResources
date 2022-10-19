@@ -9,10 +9,7 @@ namespace Interval.MonitorResource
 {
     [ExcludeFromCodeCoverage]
     public sealed class MonitorResources : IMonitorResources
-    {
-        private Dictionary<object, ulong> runProcessOne;
-        private Dictionary<object, ulong> runProcessTwo;
-        
+    {        
         public MonitorResources()
         {
 
@@ -23,10 +20,10 @@ namespace Interval.MonitorResource
 #pragma warning disable CA1416 // Validate platform compatibility
 
             var mos = new ManagementObjectSearcher("SELECT * FROM Win32_PerfRawData_PerfProc_Process");
-            runProcessOne = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
+            Dictionary<object, ulong>  runProcessOne = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
 
             Thread.Sleep(1000); // can be an arbitrary number
-            runProcessTwo = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
+            Dictionary<object, ulong> runProcessTwo = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
 #pragma warning restore CA1416 // Validate platform compatibility
 
             var total = runProcessTwo["_Total"] - runProcessOne["_Total"];
@@ -46,7 +43,7 @@ namespace Interval.MonitorResource
             var process = new PerformanceCounter("Process", "Working Set - Private", processName, true);
             try
             {
-                return process.NextValue() / (int)(1024 * 1024);
+                return process.NextValue() / (1024 * 1024);
             }
             catch
             {

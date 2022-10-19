@@ -19,7 +19,7 @@ namespace Interval.WPF.Graphic
     {
         private MonitorController? monitor;
 
-        private CancellationTokenSource cancellationTokenSource;
+        private CancellationTokenSource? cancellationTokenSource;
 
         private double maxMemory;
 

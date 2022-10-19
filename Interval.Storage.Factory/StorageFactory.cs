@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interval.Storage.Factory
 {
@@ -13,11 +14,12 @@ namespace Interval.Storage.Factory
         private static Dictionary<string, Type> keyValues = new Dictionary<string, Type>() 
         {
             { "csv", typeof(CsvStorageFile) },
-            { "json", typeof(JSONStorageFile) },
+            { "json", typeof(JsonStorageFile) },
             { "yaml", typeof(YamlStorageFile) }
         };
 
-        public StorageFactory()
+        [ExcludeFromCodeCoverage]
+        private StorageFactory()
         {
         }
 

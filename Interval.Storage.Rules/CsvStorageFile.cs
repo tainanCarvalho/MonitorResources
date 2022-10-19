@@ -1,12 +1,14 @@
 ﻿using Interval.Storage.Interface;
 using Interval.Storage.Tools;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Interval.Storage
 {
+    [ExcludeFromCodeCoverage]
     public sealed class CsvStorageFile : StoreManager
     {
 
@@ -44,6 +46,7 @@ namespace Interval.Storage
             }
             catch (Exception)
             {
+                //don't break app
             }
             finally
             {
@@ -51,10 +54,10 @@ namespace Interval.Storage
             }
         }
 
-        private string BuildRow(string data, DateTime dateTime)
+        private static string BuildRow(string data, DateTime dateTime)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append(dateTime.ToString()).Append(";").Append(data);
+            stringBuilder.Append(dateTime.ToString()).Append(';').Append(data);
             return stringBuilder.ToString();
         }
     }

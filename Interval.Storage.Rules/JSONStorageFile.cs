@@ -9,37 +9,30 @@ namespace Interval.Storage
 {
 
     [ExcludeFromCodeCoverage]
-    public class JSONStorageFile : StoreManager
+    public class JsonStorageFile : StoreManager
     {
         private const string EXTENSION = ".json";
 
         private readonly List<DataVO> list;
-      
-        public JSONStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION) => list = new();
+
+        public JsonStorageFile(string path, string nameFile) : base(path, nameFile, EXTENSION) => list = new();
 
 
-        public override Task StorageData(string value, DateTime timeColleteced)
+        public override Task StorageData(string data, DateTime timeColleteced)
         {
-            list.Add(CreateData(value, timeColleteced));
+            list.Add(CreateData(data, timeColleteced));
             return Task.CompletedTask;
         }
 
         public override void CloseData()
         {
-            try
-            {
-                var data = new MeasureDataVO<DataVO>() { data = list };
+            var data = new MeasureDataVO<DataVO>() { data = list };
 
-                JsonSerializer serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer();
 
-                WriteInFile(data, serializer);
-            }
-            finally
-            {
-
-            }
+            WriteInFile(data, serializer);
         }
-        
+
         private void WriteInFile<T>(T data, JsonSerializer serializer)
         {
             using StreamWriter writer = new(file);

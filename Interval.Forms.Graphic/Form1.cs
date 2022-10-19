@@ -14,7 +14,7 @@ namespace Interval.Forms.Graphic
 {
     public partial class Form1 : Form
     {
-        private MonitorController? monitor;
+        private MonitorController monitor;
 
         private double maxMemory;
 
@@ -42,7 +42,7 @@ namespace Interval.Forms.Graphic
             SettingProcessor(date);
         }
 
-        private void OnProcessorData(object? sender, ResourceDataEventArgs e)
+        private void OnProcessorData(object sender, ResourceDataEventArgs e)
         {
             if (cancellationTokenSource.IsCancellationRequested)
                 return;
@@ -85,7 +85,7 @@ namespace Interval.Forms.Graphic
             });
         }
 
-        private void OnMemoryData(object? sender, ResourceDataEventArgs e)
+        private void OnMemoryData(object sender, ResourceDataEventArgs e)
         {
             if (cancellationTokenSource.IsCancellationRequested)
                 return;

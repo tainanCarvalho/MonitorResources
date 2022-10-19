@@ -85,6 +85,7 @@ namespace Interval.MonitorResource
                 }
                 catch (ObjectDisposedException)
                 {
+                    //aceitável
                 }
             }
         }
@@ -124,6 +125,7 @@ namespace Interval.MonitorResource
                 }
                 catch (ObjectDisposedException)
                 {
+                    //aceitável
                 }
             }
         }

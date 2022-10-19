@@ -10,6 +10,11 @@ namespace PerformanceCounterInterval
 {
     class Program
     {
+        protected Program()
+        {
+            //private instance
+        }
+
         private static Ilogger logger = new Logger(typeof(Program));    
         public static async Task Main(string[] args)
         {

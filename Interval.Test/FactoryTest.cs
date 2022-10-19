@@ -36,7 +36,7 @@ namespace Interval.Test
 
             keyValue.TryGetValueDefault("json", typeof(CsvStorageFile), out Type value);
 
-            Assert.AreEqual(value, typeof(JSONStorageFile));
+            Assert.AreEqual(value, typeof(JsonStorageFile));
         }
 
 

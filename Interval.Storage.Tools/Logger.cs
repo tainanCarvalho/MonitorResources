@@ -8,7 +8,7 @@ namespace Interval.Storage.Tools
     [ExcludeFromCodeCoverage]
     public class Logger : Ilogger
     {
-        private ILog log;
+        private readonly ILog log;
         public Logger(Type e) => log = LogManager.GetLogger(e);
 
         public bool IsInfoEnabled => log.IsInfoEnabled;

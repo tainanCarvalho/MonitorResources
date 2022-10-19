@@ -18,7 +18,7 @@ namespace Interval.Storage
 
         public string PathFile { get => path; }
 
-        public StoreManager(string path, string nameFile, string extension)
+        protected StoreManager(string path, string nameFile, string extension)
         {
             this.path = path;
 
@@ -36,7 +36,7 @@ namespace Interval.Storage
 
         public abstract void CloseData();
 
-        protected DataVO CreateData(string value, DateTime timeColleteced) =>
+        protected static DataVO CreateData(string value, DateTime timeColleteced) =>
              new()
              {
                  Value = Convert.ToDouble(value),
