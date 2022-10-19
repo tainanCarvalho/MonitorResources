@@ -12,6 +12,7 @@ namespace Interval.MonitorResource
     {
         private Dictionary<object, ulong> runProcessOne;
         private Dictionary<object, ulong> runProcessTwo;
+        
         public MonitorResources()
         {
 
@@ -23,7 +24,8 @@ namespace Interval.MonitorResource
 
             var mos = new ManagementObjectSearcher("SELECT * FROM Win32_PerfRawData_PerfProc_Process");
             runProcessOne = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
-            Thread.Sleep(570); // can be an arbitrary number
+
+            Thread.Sleep(1000); // can be an arbitrary number
             runProcessTwo = mos.Get().Cast<ManagementObject>().ToDictionary(mo => mo.Properties["Name"].Value, mo => (ulong)mo.Properties["PercentProcessorTime"].Value);
 #pragma warning restore CA1416 // Validate platform compatibility
 
@@ -31,18 +33,16 @@ namespace Interval.MonitorResource
 
             var p1 = runProcessOne[processName];
 
-            if (runProcessTwo.ContainsKey(processName))
-            {
-                var p2 = runProcessTwo[processName];
-                return (double)(p2 - p1) / total;
-            }
+            if (!runProcessTwo.ContainsKey(processName))
+                return 0;
 
-            return 0;
+            var p2 = runProcessTwo[processName];
+            return (double)(p2 - p1) / total;
         }
 
 #pragma warning disable CA1416 // Validate platform compatibility
         public double GetProcessMemoryUsage(string processName)
-        {            
+        {
             var process = new PerformanceCounter("Process", "Working Set - Private", processName, true);
             try
             {

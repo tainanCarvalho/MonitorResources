@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Icons\Icons8-Windows-8-Programming-System-Task.ico = Icons\Icons8-Windows-8-Programming-System-Task.ico
+		sonar.bat = sonar.bat
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interval.Storage.Tools", "Interval.Storage.Tools\Interval.Storage.Tools.csproj", "{77330E64-D177-44FC-A082-BCC380A31BB9}"
