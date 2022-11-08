@@ -60,12 +60,26 @@ namespace Interval.MonitorResource
 
             monitor = monitorResources ?? new MonitorResources();
             cancellationToken = new CancellationTokenSource();
+        }
 
 
+        public MonitorController
+           (
+               string processName,
+               IMonitorResources monitorResources = null
+           )
+        {
+            this.processName = processName;
+
+            monitor = monitorResources ?? new MonitorResources();
+            cancellationToken = new CancellationTokenSource();
         }
 
         public async Task StartStorageResourceDataAsync()
         {
+            if (time == default)
+                return;
+
             while ((DateTime.Now - time < TimeSpan.FromMinutes(interval)) && !cancellationToken.IsCancellationRequested)
             {
                 try
@@ -92,6 +106,9 @@ namespace Interval.MonitorResource
 
         public async Task RunMonitorResourcesData(int delayMonitor = 1000)
         {
+            if (time == default)
+                return;
+
             while ((interval == -1 || (DateTime.Now - time < TimeSpan.FromMinutes(interval))) && !cancellationToken.IsCancellationRequested)
             {
                 try
@@ -129,6 +146,9 @@ namespace Interval.MonitorResource
                 }
             }
         }
+
+        public async Task GetProcessConsume() => await Task.FromResult(monitor.GetProcessTimeUsage(processName));
+
 
         public void Stop() => cancellationToken.CancelAfter(500);
 

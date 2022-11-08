@@ -116,12 +116,12 @@ namespace Interval.Forms.Graphic
 
         private void StartComboBoxProcessorName()
         {
-            var processlist = Process.GetProcesses();
             processorsNameCombobox.Items.Clear();
+            var processes = MonitorResources.GetProcesses();
 
-            foreach (Process theprocess in processlist.OrderBy(x => x.ProcessName))
+            foreach (var process in processes)
             {
-                processorsNameCombobox.Items.Add(new ProcessorName(theprocess.ProcessName, theprocess.Id.ToString()));
+                processorsNameCombobox.Items.Add(process);
             }
 
             processorsNameCombobox.SelectedIndex = 0;
@@ -136,7 +136,7 @@ namespace Interval.Forms.Graphic
                 MessageBox.Show("Deve selecionar um item", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var process = (ProcessorName)processorsNameCombobox.SelectedItem;
+            var process = (ProcessNameVO)processorsNameCombobox.SelectedItem;
 
             cancellationTokenSource = new CancellationTokenSource();
             semaphoreSlimProcessor = new(1, 1);
@@ -271,7 +271,7 @@ namespace Interval.Forms.Graphic
             if (text.Length < 3)
                 return;
 
-            var list = processorsNameCombobox.Items.Cast<ProcessorName>()
+            var list = processorsNameCombobox.Items.Cast<ProcessNameVO>()
                                 .Where(x => x.ToString().IndexOf(text, StringComparison.OrdinalIgnoreCase) != -1).ToList();
 
 
@@ -286,23 +286,6 @@ namespace Interval.Forms.Graphic
             if (processorsNameCombobox.Items.Count != 0)
                 processorsNameCombobox.SelectedIndex = 0;
         }
-    }
-
-    public class ProcessorName
-    {
-        private readonly string name;
-
-        private readonly string pid;
-
-        public string Name { get => name; }
-        public ProcessorName(string name, string pid)
-        {
-            this.name = name;
-            this.pid = pid;
-        }
-
-        public override string ToString() => $@"{ name } [{ pid }]";
-
     }
 
     public class ResourceDataCartesianVO

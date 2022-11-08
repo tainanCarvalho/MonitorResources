@@ -57,5 +57,12 @@ namespace Interval.MonitorResource
         }
 #pragma warning restore CA1416 // Validate platform compatibility
 
+        public static IList<ProcessNameVO> GetProcesses()
+        {
+            return Process.GetProcesses()
+                          .OrderBy(x => x.ProcessName)
+                          .Select( x=> new ProcessNameVO(x.ProcessName, x.Id))
+                          .ToList();           
+        }
     }
 }
